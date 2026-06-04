@@ -1,10 +1,11 @@
-import HeroSection from './components/HeroSection'
+import { useRef } from 'react'
+import MainScene from './components/MainScene'
 
 function App() {
   return (
-    <main>
-      <HeroSection />
-    </main>
+    <div style={{ position: 'relative' }}>
+      <MainScene />
+    </div>
   )
 }
 

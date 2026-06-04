@@ -4,13 +4,15 @@
   box-sizing: border-box;
 }
 
-body {
+html, body {
   background: #f5f0e8;
   font-family: 'Segoe UI', sans-serif;
-  overflow-x: hidden;
+  overflow: hidden; /* ScrollControls handles scrolling internally */
+  width: 100vw;
+  height: 100vh;
 }
 
 #root {
   width: 100vw;
-  min-height: 100vh;
+  height: 100vh;
 }
