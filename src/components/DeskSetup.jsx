@@ -9,6 +9,8 @@ export default function DeskSetup() {
     scene.traverse((child) => {
       if (child.isMesh) {
         console.log('Mesh:', child.name)
+        child.castShadow = true
+        child.receiveShadow = true
       }
     })
   }, [scene])
@@ -16,7 +18,7 @@ export default function DeskSetup() {
   return (
     <primitive
       object={scene}
-      position={[0.85, -1.8, 0]}
+      position={[2, -0.5, 0]}
       scale={0.5}
       rotation={[0, Math.PI + Math.PI * 0.15, 0]}
     />
