@@ -37,15 +37,11 @@ export default function MainScene() {
     <>
       {/* Hero text — normal DOM, scrolls with page */}
       <div className="hero-text-overlay">
-        <h1>
-          Hi, my
-          <br />
-          name is <span className="highlight">Henok.</span>
+        <h1 className="hero-title">
+          <span className="hero-name-line">Henok</span>
+          <span className="hero-name-line">Kebede</span>
         </h1>
-        <p>I love building beautiful digital experiences.</p>
-        <a href="#projects" className="btn">
-          Get in touch
-        </a>
+        <div className="hero-badge">WEB DEVELOPER</div>
       </div>
 
       {/* About overlay — second screen */}
