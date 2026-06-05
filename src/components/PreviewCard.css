@@ -1,0 +1,127 @@
+/* ─── Preview Card ─────────────────────────────────────────── */
+.preview-card {
+  position: relative;
+  cursor: pointer;
+  border-radius: 16px;
+  transition: transform 0.25s ease;
+}
+
+.preview-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Subtle background glow on hover */
+.preview-card::after {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  width: calc(100% + 12px);
+  height: calc(100% + 12px);
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 20px;
+  z-index: -1;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.preview-card:hover::after {
+  opacity: 1;
+}
+
+/* ─── Thumbnail ────────────────────────────────────────────── */
+.preview-card-top {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #e8e4dc;
+}
+
+.preview-card-image-wrapper {
+  width: 100%;
+  height: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.preview-card-image-container {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease;
+}
+
+.preview-card:hover .preview-card-image-container {
+  transform: scale(1.03);
+}
+
+.preview-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ─── Hover overlay with arrow button ──────────────────────── */
+.preview-card-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.preview-card:hover .preview-card-overlay {
+  opacity: 1;
+}
+
+.preview-card-arrow-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #ff6b2b;
+  color: #fff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  pointer-events: none;
+  transition: transform 0.2s ease;
+  box-shadow: 0 2px 8px rgba(255, 107, 43, 0.35);
+}
+
+.preview-card:hover .preview-card-arrow-btn {
+  transform: rotate(-45deg);
+}
+
+/* ─── Text content ─────────────────────────────────────────── */
+.preview-card-content {
+  padding: 10px 4px 4px;
+}
+
+.preview-card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.preview-card-description {
+  font-size: 0.85rem;
+  color: #777;
+  margin: 3px 0 0;
+  font-weight: 500;
+  font-family: 'Segoe UI', sans-serif;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
