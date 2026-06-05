@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap');
+
+.navbar {
+  position: fixed;
+  top: 1.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.4s ease;
+  white-space: nowrap;
+}
+
+/* The pill container */
+.navbar-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.35rem;
+  border-radius: 99px;
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* LIGHT THEME — used on cream/light sections (hero, contact) */
+.navbar.theme-light .navbar-pill {
+  background: rgba(232, 223, 208, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+}
+
+.navbar.theme-light .nav-item {
+  color: #2a2218;
+}
+
+.navbar.theme-light .nav-item:hover {
+  color: #1a1a1a;
+}
+
+/* DARK THEME — used on dark sections (about, projects) */
+.navbar.theme-dark .navbar-pill {
+  background: rgba(20, 20, 20, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+.navbar.theme-dark .nav-item {
+  color: rgba(245, 240, 232, 0.65);
+}
+
+.navbar.theme-dark .nav-item:hover {
+  color: #f5f0e8;
+}
+
+/* Individual nav item */
+.nav-item {
+  position: relative;
+  padding: 0.55rem 1.4rem;
+  border-radius: 99px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+/* Active pill — orange highlight */
+.nav-item.active {
+  background: #FF6B2B;
+  color: #ffffff !important;
+  box-shadow: 0 3px 12px rgba(255, 107, 43, 0.45);
+}
+
+.nav-item.active:hover {
+  background: #e05a20;
+  color: #ffffff !important;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .navbar {
+    top: 0.75rem;
+    width: calc(100vw - 2rem);
+  }
+
+  .navbar-pill {
+    justify-content: center;
+  }
+
+  .nav-item {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.5px;
+  }
+}
