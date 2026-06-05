@@ -1,38 +1,55 @@
 import { Canvas } from '@react-three/fiber'
-import { Suspense } from 'react'
+import { Suspense, useState, useRef, useEffect } from 'react'
 import ContactScene from './ContactScene'
 import './ContactSection.css'
 
 export default function ContactSection() {
+  const [inView, setInView] = useState(false)
+  const sectionRef = useRef()
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setInView(entry.isIntersecting)
+      },
+      { rootMargin: '200px' } // Load slightly before it comes into view
+    )
+
+    if (sectionRef.current) observer.observe(sectionRef.current)
+    return () => observer.disconnect()
+  }, [])
+
   return (
-    <section id="contact" className="contact-section">
+    <section id="contact" className="contact-section" ref={sectionRef}>
 
       {/* Full-viewport 3D Canvas */}
       <div className="contact-canvas-wrapper">
-        <Canvas
-          camera={{ position: [0, 1.5, 6], fov: 45 }}
-          shadows
-          gl={{ alpha: true, antialias: true }}
-        >
-          <Suspense fallback={null}>
-            <ambientLight intensity={1.2} />
-            <directionalLight
-              position={[5, 8, 5]}
-              intensity={1.5}
-              castShadow
-              shadow-mapSize={[2048, 2048]}
-            />
-            <directionalLight position={[-5, 3, -5]} intensity={0.4} />
+        {inView && (
+          <Canvas
+            camera={{ position: [0, 1.5, 6], fov: 45 }}
+            shadows
+            gl={{ alpha: true, antialias: true }}
+          >
+            <Suspense fallback={null}>
+              <ambientLight intensity={1.2} />
+              <directionalLight
+                position={[5, 8, 5]}
+                intensity={1.5}
+                castShadow
+                shadow-mapSize={[1024, 1024]}
+              />
+              <directionalLight position={[-5, 3, -5]} intensity={0.4} />
 
-            <ContactScene />
+              <ContactScene />
 
-            {/* Invisible floor to receive shadows */}
-            <mesh position={[0, -1.5, 0]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
-              <planeGeometry args={[50, 50]} />
-              <shadowMaterial opacity={0.12} />
-            </mesh>
-          </Suspense>
-        </Canvas>
+              {/* Invisible floor to receive shadows */}
+              <mesh position={[0, -1.5, 0]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
+                <planeGeometry args={[50, 50]} />
+                <shadowMaterial opacity={0.12} />
+              </mesh>
+            </Suspense>
+          </Canvas>
+        )}
       </div>
 
       {/* Top-left text + social links */}
