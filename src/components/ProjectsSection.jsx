@@ -1,36 +1,49 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { projects } from '../data/projects'
-import ProjectCard from './ProjectCard'
-import ProjectModal from './ProjectModal'
+import PreviewCard from './PreviewCard'
+import ProjectOverlay from './ProjectOverlay'
+import './ProjectsSection.css'
 
 export default function ProjectsSection() {
   const [selectedProject, setSelectedProject] = useState(null)
 
-  return (
-    <section className="min-h-screen bg-[#f5f0e8] py-20 px-8" id="projects">
-      <div className="max-w-3xl mx-auto">
-        {/* Section heading */}
-        <h2 className="text-5xl font-extrabold text-gray-900 mb-10">Projects</h2>
+  const handleSelect = useCallback((project) => {
+    setSelectedProject(project)
+  }, [])
 
-        {/* 2-column grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {projects.map(project => (
-            <ProjectCard
+  const handleClose = useCallback(() => {
+    setSelectedProject(null)
+  }, [])
+
+  return (
+    <>
+      <section className="projects-section" id="projects">
+        {/* Heading */}
+        <div className="projects-header">
+          <span className="projects-banner">Selected</span>
+          <h2 className="projects-title">Projects</h2>
+        </div>
+
+        {/* Card grid */}
+        <div className="projects-grid">
+          {projects.map((project) => (
+            <PreviewCard
               key={project.id}
               project={project}
-              onClick={setSelectedProject}
+              onSelect={handleSelect}
             />
           ))}
         </div>
-      </div>
+      </section>
 
-      {/* Detail modal */}
+      {/* Full-screen detail overlay */}
       {selectedProject && (
-        <ProjectModal
+        <ProjectOverlay
           project={selectedProject}
-          onClose={() => setSelectedProject(null)}
+          onClose={handleClose}
+          onSelectProject={handleSelect}
         />
       )}
-    </section>
+    </>
   )
 }
