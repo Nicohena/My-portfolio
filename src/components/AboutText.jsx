@@ -1,9 +1,33 @@
 import Lightfall from './Lightfall'
 import './AboutText.css'
+import { useEffect, useRef } from 'react'
 
 export default function AboutText() {
+  const containerRef = useRef(null)
+
+  // Fade in the cards after scrolling past the Hero section
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY
+      const height = window.innerHeight
+      // Cards start fading when we enter the About section (after first viewport)
+      const t = Math.min(Math.max((scrollY - height) / height, 0), 1)
+      if (containerRef.current) {
+        // Ensure the overlay stays visible
+        containerRef.current.style.opacity = 1
+        // Apply opacity to each card
+        const cards = containerRef.current.querySelectorAll('.about-card')
+        cards.forEach((card) => (card.style.opacity = t))
+      }
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    // Initialise on mount
+    handleScroll()
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
-    <div className="about-overlay">
+    <div className="about-overlay" ref={containerRef} style={{ opacity: 1 }}>
       {/* Lightfall animated background */}
       <div className="lightfall-bg">
         <Lightfall
