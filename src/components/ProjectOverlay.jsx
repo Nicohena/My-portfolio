@@ -15,10 +15,12 @@ export default function ProjectOverlay({ project, onClose, onSelectProject }) {
     onSelectProject(nextProject)
   }, [nextProject, onSelectProject])
 
-  // Lock body scroll & listen for Escape key
+  // Lock page scroll & listen for Escape key
   useEffect(() => {
-    const prev = document.body.style.overflow
+    const prevBodyOverflow = document.body.style.overflow
+    const prevHtmlOverflow = document.documentElement.style.overflow
     document.body.style.overflow = 'hidden'
+    document.documentElement.style.overflow = 'hidden'
 
     const onKey = (e) => {
       if (e.key === 'Escape') onClose()
@@ -29,7 +31,8 @@ export default function ProjectOverlay({ project, onClose, onSelectProject }) {
     if (overlayRef.current) overlayRef.current.scrollTo(0, 0)
 
     return () => {
-      document.body.style.overflow = prev
+      document.body.style.overflow = prevBodyOverflow
+      document.documentElement.style.overflow = prevHtmlOverflow
       document.removeEventListener('keydown', onKey)
     }
   }, [onClose, project.id])
@@ -46,6 +49,11 @@ export default function ProjectOverlay({ project, onClose, onSelectProject }) {
         ref={overlayRef}
         className={`project-overlay visible ${themeClass}`}
       >
+        {/* Back button */}
+        <button className="project-back-btn" onClick={onClose} aria-label="Back to projects">
+          ←
+        </button>
+
         {/* Close button */}
         <button className="project-close-btn" onClick={onClose} aria-label="Close">
           ✕

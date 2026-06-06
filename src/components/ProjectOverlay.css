@@ -74,6 +74,41 @@
   transform: scale(1.08);
 }
 
+.project-back-btn {
+  position: fixed;
+  top: 20px;
+  left: 24px;
+  z-index: 1001;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.08);
+  color: #333;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+  transition: background 0.2s, transform 0.2s;
+}
+
+.project-back-btn:hover {
+  background: rgba(0, 0, 0, 0.14);
+  transform: scale(1.08);
+}
+
+.theme-dark .project-back-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: #e0e8f0;
+}
+
+.theme-dark .project-back-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
 .theme-dark .project-close-btn {
   background: rgba(255, 255, 255, 0.1);
   color: #e0e8f0;
